@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_clone/screens/search_screen.dart';
 
 class ResponsiveLayoutScreen extends StatelessWidget {
   final Widget mobileScreenLayout;
@@ -12,10 +13,11 @@ class ResponsiveLayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth <= 768) {
-        return mobileScreenLayout;
-      }
-      return webScreenLayout;
+      // if (constraints.maxWidth <= 768) {
+      //   return mobileScreenLayout;
+      // }
+      // return webScreenLayout;
+      return SearchScreen();
     });
   }
 }
