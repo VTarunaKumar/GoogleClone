@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_clone/colors.dart';
+import 'package:google_clone/services/api_service.dart';
 import 'package:google_clone/widgets/search_header.dart';
+import 'package:google_clone/widgets/search_result_component.dart';
 import 'package:google_clone/widgets/search_tabs.dart';
 
 import '../widgets/search_footer.dart';
@@ -27,6 +29,42 @@ class SearchScreen extends StatelessWidget {
               thickness: 0.3,
             ),
             //searchResult
+            FutureBuilder(
+                future: ApiService().fetchData(
+                  queryTerm: "Tarun Kumar",
+                ),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 150, top: 12),
+                          child: Text(
+                            "About ${snapshot.data?["searchInformation"]["formattedTotalResults"]} results (${snapshot.data?["searchInformation"]["formattedSearchTime"]}) ",
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: Color(0xff70757a),
+                            ),
+                          ),
+                        ),
+                        ListView.builder(itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.only(left: 150, top: 10),
+                            child: SearchResultComponent(
+                              link: '',
+                            ),
+                          );
+                        })
+                      ],
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }),
+
             //pagination buttons
             SizedBox(
               width: double.infinity,
