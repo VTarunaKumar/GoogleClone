@@ -79,11 +79,12 @@ class MobileScreenLayout extends StatelessWidget {
                       SizedBox(
                         height: 30,
                       ),
-                      SearchButtons(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TranslationButtons(),
+
+                      // SearchButtons(),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      // TranslationButtons(),
                     ],
                   ),
                   const MobileFooter(),

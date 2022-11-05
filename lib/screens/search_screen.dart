@@ -30,7 +30,9 @@ class SearchScreen extends StatelessWidget {
               const SearchHeader(),
               Padding(
                 padding: EdgeInsets.only(left: size.width <= 768 ? 10 : 150),
-                child: const SearchTabs(),
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: const SearchTabs()),
               ),
               const Divider(
                 height: 0,
@@ -46,35 +48,41 @@ class SearchScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: size.width <= 768 ? 10 : 150, top: 12),
-                            child: Text(
-                              "About ${snapshot.data?["searchInformation"]["formattedTotalResults"]} results (${snapshot.data?["searchInformation"]["formattedSearchTime"]}) ",
-                              style: const TextStyle(
-                                fontSize: 15,
-                                color: Color(0xff70757a),
-                              ),
-                            ),
-                          ),
                           ListView.builder(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             itemCount: snapshot.data?['items'].length,
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                    left: size.width <= 768 ? 10 : 150,
-                                    top: 10),
-                                child: SearchResultComponent(
-                                  desc: snapshot.data?['items'][index]
-                                      ['snippet'],
-                                  linkToGo: snapshot.data?['items'][index]
-                                      ['link'],
-                                  link: snapshot.data?['items'][index]
-                                      ['formattedUrl'],
-                                  text: snapshot.data?['items'][index]['title'],
-                                ),
+                              return Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: size.width <= 768 ? 10 : 150,
+                                        top: 12),
+                                    child: Text(
+                                      "About ${snapshot.data?["searchInformation"]["formattedTotalResults"]} results (${snapshot.data?["searchInformation"]["formattedSearchTime"]}) ",
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                        color: Color(0xff70757a),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: size.width <= 768 ? 10 : 150,
+                                        top: 10),
+                                    child: SearchResultComponent(
+                                      desc: snapshot.data?['items'][index]
+                                          ['snippet'],
+                                      linkToGo: snapshot.data?['items'][index]
+                                          ['link'],
+                                      link: snapshot.data?['items'][index]
+                                          ['formattedUrl'],
+                                      text: snapshot.data?['items'][index]
+                                          ['title'],
+                                    ),
+                                  ),
+                                ],
                               );
                             },
                           ),
