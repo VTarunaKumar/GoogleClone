@@ -73,6 +73,9 @@ class _SearchResultComponentState extends State<SearchResultComponent> {
           widget.desc,
           style: const TextStyle(fontSize: 14, color: primaryColor),
         ),
+        const SizedBox(
+          height: 10,
+        )
       ],
     );
   }
