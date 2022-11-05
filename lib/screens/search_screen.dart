@@ -49,14 +49,24 @@ class SearchScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        ListView.builder(itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(left: 150, top: 10),
-                            child: SearchResultComponent(
-                              link: '',
-                            ),
-                          );
-                        })
+                        ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: snapshot.data?['items'].length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(left: 150, top: 10),
+                              child: SearchResultComponent(
+                                desc: snapshot.data?['items'][index]['snippet'],
+                                linkToGo: snapshot.data?['items'][index]
+                                    ['link'],
+                                link: snapshot.data?['items'][index]
+                                    ['formattedUrl'],
+                                text: snapshot.data?['items'][index]['title'],
+                              ),
+                            );
+                          },
+                        )
                       ],
                     );
                   }
